@@ -18,7 +18,7 @@ fun main() {
     task64()
 }
 
-// Задание №1: Точное время
+
 fun task61() = runBlocking {
     launch {
         while (true) {
@@ -27,8 +27,8 @@ fun task61() = runBlocking {
         }
     }
 }
+////////////////////////////////////////////////////////////
 
-// Задание №2: Математические операции
 suspend fun mathOperation(a: Double, b: Double): Double {
     delay(2000L) // имитация длительной операции
     return Math.pow(a, b) + Math.sqrt(a * b)
@@ -40,7 +40,7 @@ fun task62() = runBlocking {
     println("Результат вычисления: ${result.await()}")
 }
 
-// Задание №3: Эффективность
+////////////////////////////////////////////////////////////
 suspend fun checkEven(index: Int): Pair<Int, Boolean> {
     val number = Random.nextInt()
     return Pair(index, number % 2 == 0)
@@ -62,7 +62,7 @@ fun task63() = runBlocking {
     println("Общее время выполнения: $time ms")
 }
 
-// Задание №4: Быстрота
+////////////////////////////////////////////////////////////
 suspend fun <T> withTimeoutOrDefault(timeMillis: Long, defaultValue: T, block: suspend () -> T): T {
     return try {
         withTimeout(timeMillis) {
@@ -83,13 +83,13 @@ fun task64() = runBlocking {
     val shortTask = withTimeoutOrDefault(1000L, "Timeout") {
         longRunningTask(500L)
     }
-    println(shortTask) // Output: Task completed
+    println(shortTask)
 
     val longTask = withTimeoutOrDefault(1000L, "Timeout") {
         longRunningTask(1500L)
     }
-    println(longTask) // Output: Timeout
+    println(longTask)
 }
 
-// main функция
+
 

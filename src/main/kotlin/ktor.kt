@@ -15,7 +15,7 @@ suspend fun downloadImage(client: HttpClient, url: String, filePath: String) {
     File(filePath).writeBytes(response)
 }
 
-suspend fun downloadImagesWithCustomNames(client: HttpClient, urls: List<String>, outputDir: String) = coroutineScope {
+suspend fun CustomNames(client: HttpClient, urls: List<String>, outputDir: String) = coroutineScope {
     urls.mapIndexed { index, url ->
         async(Dispatchers.IO) {
             val fileName = "$index.image.jpg"
@@ -25,7 +25,7 @@ suspend fun downloadImagesWithCustomNames(client: HttpClient, urls: List<String>
     }.awaitAll()
 }
 
-suspend fun downloadImagesWithOriginalNames(client: HttpClient, urls: List<String>, outputDir: String) = coroutineScope {
+suspend fun OriginalNames(client: HttpClient, urls: List<String>, outputDir: String) = coroutineScope {
     urls.map { url ->
         async(Dispatchers.IO) {
             val fileName = URL(url).path.split("/").last()
@@ -51,10 +51,10 @@ fun taskKtor(baseDir: String) = runBlocking {
     File(originalNamesDir).mkdirs()
 
     println("Скачивание файлов с кастомным названием:")
-    downloadImagesWithCustomNames(client, urls, customNamesDir)
+    CustomNames(client, urls, customNamesDir)
 
     println("Скачивание файлов с оригинальным названием:")
-    downloadImagesWithOriginalNames(client, urls, originalNamesDir)
+    OriginalNames(client, urls, originalNamesDir)
 
     client.close()
 }
